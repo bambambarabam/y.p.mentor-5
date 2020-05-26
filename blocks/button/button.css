@@ -1,0 +1,13 @@
+@import url(./_type/button_type_edit.css);
+@import url(./_type/button_type_duplicate.css);
+@import url(./_type/button_type_delete.css);
+
+.button {
+  cursor: pointer;
+  border: 0 none;
+  min-width: 32px;
+  min-height: 32px;
+  background-color: #000;
+  background-position: center;
+  background-repeat: no-repeat;
+}

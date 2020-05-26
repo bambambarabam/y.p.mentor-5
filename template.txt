@@ -1,0 +1,50 @@
+list.insertAdjacentHTML('beforeend', 
+    `<li class="list__item">
+        <span class="item__text">${text}</span>
+        <button type="button" class="button button_type_edit" src="images/Edit.png">Редактировать</button>
+        <button type="button" class="button button_type_duplicate" src="images/Duplicate.png">Копировать</button>
+        <button type="button" class="button button_type_delete" src="images/Delete.png">Удалить</button>
+    </li> `
+);
+
+
+const li = document.createElement('li');
+li.classList.add('list__item');
+
+const span = document.createElement('span');
+span.innerText = text;
+span.classList.add('item__text');
+li.appendChild(span);
+
+const btnEdit = document.createElement('button');
+btnEdit.setAttribute('type', 'button');
+btnEdit.classList.add('button', 'button_type_edit');
+li.appendChild(btnEdit);
+
+const btnDupl = document.createElement('button');
+btnDupl.setAttribute('type', 'button');
+btnDupl.classList.add('button', 'button_type_duplicate');
+li.appendChild(btnDupl);
+
+const btnDel = document.createElement('button');
+btnDel.setAttribute('type', 'button');
+btnDel.classList.add('button', 'button_type_delete');
+li.appendChild(btnDel);
+
+list.appendChild(li);
+
+
+
+const htmlElement = itemTemplate.cloneNode(true);
+htmlElement.querySelector('.item__text').innerText = text;
+list.appendChild(htmlElement);
+
+
+(function() { 
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        input.addEventListener('keyup', (event) => {
+            console.log(event.target.value)
+        })
+    })
+})();
