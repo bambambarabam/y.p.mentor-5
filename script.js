@@ -1,4 +1,4 @@
-const todoList = [
+const items = [
   "Сделать проектную работу",
   "Полить цветы",
   "Пройти туториал по Реакту",
@@ -8,102 +8,112 @@ const todoList = [
   "Решить задачу на Codewars",
 ];
 
-const itemTemplate = document.querySelector(".item_template").content;
-const list = document.querySelector(".list");
-const form = document.querySelector(".form");
-const formInput = document.querySelector(".form__input");
-const formSubmit = document.querySelector(".form__submit");
+const todo = document.querySelector('.todo');
 
-const state = {
-  //режим :  редактикирование или создание
-  mode: "add",
-  // индекс элемента, который редактируем
-  index: 0,
-};
+const createTodoForm = (...arg) => new TodoForm(...arg);
 
-form.addEventListener("submit", function (evt) {
-  evt.preventDefault();
-  const text = formInput.value;
+const createTodoListItem = (...arg) => new TodoListItem(...arg);
 
-  // если режим создание
-  if (state.mode === "add") {
-    // добавляем элемент в конец списка, т.к. выводим список снизу вверх через prepend
-    todoList.push(text);
-    // отображаем элемент в разметке
-    renderTemplateItem(text);
-  }
+const todoList = new TodoList(items, createTodoForm, createTodoListItem);
 
-  // если редактирование
-  if (state.mode === "update") {
-    // обновлять список
-    todoList[state.index] = text;
-    // отображаем элемент в разметке
-    renderTemplateItem(text);
-  }
-  // сбрасываем состояние
-  state.mode = "add";
-  formInput.value = "";
-  formSubmit.value = "Добавить";
-});
+todoList.render(todo);
 
-// добавление обработчиков на элемент задачи
-// на кнопку редактировать и удалить
-function addTemplateEvents(template) {
-  const delButton = template.querySelector(".button_type_delete");
 
-  delButton.addEventListener("click", (evt) => {
-    const list_item = evt.target.closest(".list__item");
-    const text = list_item.querySelector(".item__text").innerText;
 
-    const index = todoList.indexOf(text);
+//const list = document.querySelector(".list");
 
-    todoList.splice(index, 1);
+// const state = {
+//   //режим :  редактикирование или создание
+//   mode: "add",
+//   // индекс элемента, который редактируем
+//   index: 0,
+// };
 
-    list_item.remove();
-  });
+// // form.addEventListener("submit", function (evt) {
+// //   evt.preventDefault();
+// //   const text = formInput.value;
 
-  const editButton = template.querySelector(".button_type_edit");
+// //   // если режим создание
+// //   if (state.mode === "add") {
+// //     // добавляем элемент в конец списка, т.к. выводим список снизу вверх через prepend
+// //     items.push(text);
+// //     // отображаем элемент в разметке
+// //     renderTemplateItem(text);
+// //   }
 
-  editButton.addEventListener("click", (evt) => {
-    const list_item = evt.target.closest(".list__item");
+// //   // если редактирование
+// //   if (state.mode === "update") {
+// //     // обновлять список
+// //     items[state.index] = text;
+// //     // отображаем элемент в разметке
+// //     renderTemplateItem(text);
+// //   }
+// //   // сбрасываем состояние
+// //   state.mode = "add";
+// //   formInput.value = "";
+// //   formSubmit.value = "Добавить";
+// // });
 
-    const text = list_item.querySelector(".item__text").innerText;
+// // добавление обработчиков на элемент задачи
+// // на кнопку редактировать и удалить
+// function addTemplateEvents(template) {
+//   const delButton = template.querySelector(".button_type_delete");
 
-    formInput.value = text;
+//   delButton.addEventListener("click", (evt) => {
+//     const list_item = evt.target.closest(".list__item");
+//     const text = list_item.querySelector(".item__text").innerText;
 
-    formSubmit.value = "Сохранить";
+//     const index = items.indexOf(text);
 
-    // переходим в режим редактирования
-    state.mode = "update";
-    state.index = todoList.indexOf(text);
-  });
-}
+//     items.splice(index, 1);
 
-function renderTemplateItem(item) {
-  const template = itemTemplate.cloneNode(true);
+//     list_item.remove();
+//   });
 
-  template.querySelector(".item__text").innerText = item;
-  // добавить обработчики
-  addTemplateEvents(template);
+//   const editButton = template.querySelector(".button_type_edit");
 
-  // по аналогии с submit формы
-  if (state.mode === "add") {
-    list.prepend(template);
-  }
-  if (state.mode === "update") {
-    // махинация с индексом, потому что выводим список в обратном порядке
-    const ruleIndex = todoList.length - (state.index + 1);
-    // берем из списка текущий элемент
-    const currentElement = list.children[ruleIndex];
-    // заменяем его на новый шаблон
-    currentElement.replaceWith(template);
-  }
-}
+//   editButton.addEventListener("click", (evt) => {
+//     const list_item = evt.target.closest(".list__item");
 
-// вывести список на экран
-function render() {
-  // перебираем список и выводим каждый элемент на экран
-  todoList.forEach(renderTemplateItem);
-}
+//     const text = list_item.querySelector(".item__text").innerText;
 
-render();
+//     formInput.value = text;
+
+//     formSubmit.value = "Сохранить";
+
+//     // переходим в режим редактирования
+//     state.mode = "update";
+//     state.index = items.indexOf(text);
+//   });
+// }
+
+// function renderTemplateItem(item) {
+//   const template = itemTemplate.cloneNode(true);
+
+//   template.querySelector(".item__text").innerText = item;
+//   // добавить обработчики
+//   addTemplateEvents(template);
+
+//   // по аналогии с submit формы
+//   if (state.mode === "add") {
+//     list.prepend(template);
+//   }
+//   if (state.mode === "update") {
+//     // махинация с индексом, потому что выводим список в обратном порядке
+//     const ruleIndex = items.length - (state.index + 1);
+//     // берем из списка текущий элемент
+//     const currentElement = list.children[ruleIndex];
+//     // заменяем его на новый шаблон
+//     currentElement.replaceWith(template);
+//   }
+// }
+
+// // вывести список на экран
+// function render() {
+//   // перебираем список и выводим каждый элемент на экран
+//   items.forEach(item => new TodoListItem(item).render(list));
+// }
+
+// render();
+
+

@@ -9,12 +9,6 @@
 <body>
     <div class="todo">
         <h1 class="title">Todo List</h1>
-        <form class="form">
-            <input type="text" class="form__input" placeholder="Следующее дело...">
-            <input type="submit" class="form__submit" value="Добавить">
-        </form>
-        <ul class="list">
-        </ul>
     </div>
     <footer class="footer">© Yandex.Praktikum 2020</footer>
     <template class="item_template">
@@ -25,6 +19,19 @@
             <button type="button" class="button button_type_delete" src="images/Delete.png" title="Удалить"></button>
         </li>
     </template>
+    <template class="form_template">
+        <form class="form">
+            <input type="text" class="form__input" placeholder="Следующее дело...">
+            <input type="submit" class="form__submit" value="Добавить">
+        </form>
+    </template>
+    <template class="list_template">
+        <ul class="list">
+        </ul>
+    </template>
+    <script src="./scripts/TodoListItem.js" defer></script>
+    <script src="./scripts/TodoForm.js" defer></script>
+    <script src="./scripts/TodoList.js" defer></script>
     <script src="./script.js" defer></script>
 </body>
 </html>
