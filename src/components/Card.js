@@ -1,7 +1,9 @@
-export default class Card {
+import BaseTemplate from "./BaseTemplate.js";
+
+export default class Card extends BaseTemplate{
   constructor(text, templateClass) {
+    super(templateClass);
     this._text = text;
-    this._templateClass = templateClass;
   }
 
   _setEventListeners() {
@@ -11,12 +13,8 @@ export default class Card {
     });
   }
 
-  _getElement() {
-    this._element = document
-      .querySelector(this._templateClass)
-      .content
-      .cloneNode(true)
-      .children[0];
+  _getElementCard() {
+    this._element = super._getElement();
 
     this._element.querySelector(".item__text").textContent = this._text;
 
@@ -26,7 +24,7 @@ export default class Card {
   }
 
   render(container) {
-    this._getElement();
+    this._getElementCard();
     container.prepend(this._element);
   }
 }

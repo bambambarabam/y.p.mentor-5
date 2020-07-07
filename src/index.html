@@ -1,29 +1,55 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Templates</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="todo">
-        <h1 class="title">Todo List</h1>
-        <form class="form">
-            <input type="text" class="form__input" placeholder="Следующее дело...">
-            <input type="submit" class="form__submit" value="Добавить">
-        </form>
-        <ul class="list">
-        </ul>
+      <h1 class="title">Todo List</h1>
+      <!--form-->
+      <!--list-->
     </div>
     <footer class="footer">© Yandex.Praktikum 2020</footer>
 
-    <template class="item_template">
-        <li class="list__item">
-            <span class="item__text"></span>
-            <button type="button" class="button button_type_edit" src="./images/Edit.png" title="Редактировать"></button>
-            <button type="button" class="button button_type_duplicate" src="./images/Duplicate.png" title="Копировать"></button>
-            <button type="button" class="button button_type_delete" src="./images/Delete.png" title="Удалить"></button>
-        </li>
+    <template class="list_template">
+      <ul class="list"></ul>
     </template>
-</body>
+
+    <template class="form_template">
+      <form class="form">
+        <input
+          type="text"
+          class="form__input"
+          placeholder="Следующее дело..."
+        />
+        <input type="submit" class="form__submit" value="Добавить" />
+      </form>
+    </template>
+
+    <template class="item_template">
+      <li class="list__item">
+        <span class="item__text"></span>
+        <button
+          type="button"
+          class="button button_type_edit"
+          src="./images/Edit.png"
+          title="Редактировать"
+        ></button>
+        <button
+          type="button"
+          class="button button_type_duplicate"
+          src="./images/Duplicate.png"
+          title="Копировать"
+        ></button>
+        <button
+          type="button"
+          class="button button_type_delete"
+          src="./images/Delete.png"
+          title="Удалить"
+        ></button>
+      </li>
+    </template>
+  </body>
 </html>

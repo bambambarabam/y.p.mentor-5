@@ -1,8 +1,11 @@
 import "./index.css";
-import Card from '../components/Card.js';
 import "../images/Edit.png";
 import "../images/Duplicate.png";
 import "../images/Delete.png";
+
+import Card from '../components/Card.js';
+import List from '../components/list.js';
+import Form from '../components/Form.js';
 
 const items = [
   "Сделать проектную работу",
@@ -11,18 +14,16 @@ const items = [
   "Сделать фронт для своего проекта",
   "Погулять с собакой",
   "Разобраться в замыканиях",
-  "Решить задачу на Codewars",
+  "Решить задачу на Codewars1",
 ];
 
-const list = document.querySelector(".list");
+const todo = document.querySelector(".todo");
 
-// вывести список на экран
-function render() {
-  // перебираем список и выводим каждый элемент на экран
-  items.forEach((item) => {
-    const card = new Card(item, ".item_template");
-    card.render(list);
-  });
-}
+const createItem = (item) => new Card(item, ".item_template");
+const createForm = (addItem) => new Form(".form_template", addItem);
 
-render();
+const list = new List(items, ".list_template", todo, createItem, createForm);
+list.render();
+
+
+
